@@ -1,15 +1,17 @@
 import FirstStep from "./FirstStep"
 import SecondStep from "./SecondStep"
 import ThirdStep from "./ThirdStep"
-import React, {useState} from "react"
+import React, {useContext} from "react"
+import {multiStepContext} from "../StepContext"
 
 export default function Form(props) {
 
+  const {currentStep, setStep, submitData} = useContext(multiStepContext)
     function stepShow (step) {
       switch(step)  {
-        case 1: return <><FirstStep/><button>Next</button></>
-        case 2: return <><SecondStep/><button>Back</button><button>Next</button></>
-        case 3: return <> <ThirdStep/><button>Back</button><button>Submit</button></>
+        case 1: return <><FirstStep/><button onClick={()=> setStep(2)}>Next</button></>
+        case 2: return <><SecondStep/><button onClick={()=> setStep(1)}>Back</button><button onClick={()=> setStep(3)}>Next</button></>
+        case 3: return <> <ThirdStep/><button onClick={()=> setStep(2)}>Back</button><button onClick={submitData}>Submit</button></>
       }
     }
 
@@ -20,7 +22,7 @@ export default function Form(props) {
           <span>2</span>
           <span>3</span>
         </div>
-        {stepShow(2)}
+        {stepShow(currentStep)}
         </>
     )
 }
