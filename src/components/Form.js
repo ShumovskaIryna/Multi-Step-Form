@@ -7,6 +7,7 @@ import {multiStepContext} from "../StepContext"
 export default function Form(props) {
 
   const {currentStep, setStep, submitData} = useContext(multiStepContext)
+  
     function stepShow (step) {
       switch(step)  {
         case 1: return <><FirstStep/><button onClick={()=> setStep(2)}>Next</button></>
